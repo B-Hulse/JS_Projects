@@ -1,0 +1,56 @@
+body {
+    font-family: "Segoe UI", Roboto, sans-serif;
+    background-color: #F2F2F2;
+}
+button {
+    background-color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    border-radius:8px;
+    display:block;
+    margin:auto;
+    margin-top: 5px;
+
+}
+button.start {    
+    border: 2px solid #FF0000;
+    color: #FF0000;
+    padding: 16px 32px;
+}
+button.start:hover {
+    background-color: #FF0000;
+    color: white;
+}
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: white;
+    color: #FF0000;
+}
+button:disabled:hover {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: white;
+    color: #FF0000;
+}
+button.restart { 
+    padding: 8px 16px;
+    border: 2px solid #000066;
+    color: #000066;
+}
+button.restart:hover {
+    background-color: #000066;
+    color:white;
+}
+p {
+    text-align:center;
+    font-weight: bold;
+    margin:0px;
+}
+div.box {
+    padding: 10px;
+    line-height:1.8;
+}
