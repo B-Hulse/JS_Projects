@@ -1,0 +1,65 @@
+<!DOXTYPE html>
+<html manifest="CAManifest.appcache">
+
+<head>
+    <title>Brian's Brain</title>
+    <link rel="stylesheet" type="text/css" href="CAStyle.css">
+    <link rel="stylesheet" type="text/css" href="CAPrint.css">
+</head>
+
+
+<body>
+    <div class="page_header">
+        <h1>Brian's Brain</h1>
+    </div>
+    <ul class="menu">
+        <li style="float:right">
+            <a href="main.html">Main Page</a>
+        </li>
+        <li>
+            <a href="conway.html">Game of Life</a>
+        </li>
+        <li>
+            <a href="briansbrain.html">Brian's Brain</a>
+        </li>
+        <li>
+            <a href="rule30.html">Rule 30</a>
+        </li>
+        <li>
+            <a href="ant.html">Langton's Ant</a>
+        </li>
+    </ul>
+    </br>
+    <div class="content">
+        <h2>
+            Overview
+        </h2>
+        <p>
+            Devised by Brian Silverman, Brian's Brain is a two-dimentional Cellular Automaton that exists in an infinite square grid
+            where each cell has three states: On, Dying or Off.
+            <br>
+            <br> Each time step the cells consider all 8 adjacent neighbours and follow the rules:
+            <ol>
+                <li>All Off cells turn on if they have two neighbours that are On</li>
+                <li>All On cells turn to dying</li>
+                <li>All Dying cells turn off</li>
+            </ol>
+        </p>
+    </div>
+    <div class="content">
+        <h2>
+            Visualisation
+        </h2>
+        <p>
+            Visualising Brian's Brain can be done with a grid of square cells that have one of three colours, depending on state.
+        </p>
+        <canvas id="golCanvas" width="750" height="500" onclick="pClick()"></canvas>
+        <br>
+        <button onclick="toggleStart()">Start/Stop</button>
+        <button onclick="randomizeGrid()">Randomize Grid</button>
+        <!-- img src="resources/BB.gif" alt="Brian's Brain in action"-->
+    </div>
+    <script src="briansbrain.js"></script>
+</body>
+
+</html>

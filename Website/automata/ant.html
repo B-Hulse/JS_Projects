@@ -1,0 +1,68 @@
+<!DOXTYPE html>
+<html manifest="CAManifest.appcache">
+
+<head>
+    <title>Langton's Ant</title>
+    <link rel="stylesheet" type="text/css" href="CAStyle.css">
+    <link rel="stylesheet" type="text/css" href="CAPrint.css">
+</head>
+
+<body>
+    <div class="page_header">
+        <h1>Langton's Ant</h1>
+    </div>
+    <ul class="menu">
+        <li style="float:right">
+            <a href="main.html">Main Page</a>
+        </li>
+        <li>
+            <a href="conway.html">Game of Life</a>
+        </li>
+        <li>
+            <a href="briansbrain.html">Brian's Brain</a>
+        </li>
+        <li>
+            <a href="rule30.html">Rule 30</a>
+        </li>
+        <li>
+            <a href="ant.html">Langton's Ant</a>
+        </li>
+    </ul>
+    </br>
+    <div class="content">
+        <h2>
+            Overview
+        </h2>
+        <p>
+            Langton's and is a two-dimentional infinite cellular automaton. Each cell can be either Black or White, however at any given
+            time one cell will have the 'ant'.
+            <br>
+            <br> In Langton's Ant the 'ant' is facing in a certain direction and moves around according to a simple set of rules.
+            <ol>
+                <li>If on a white space, Change the colour of the space, rotate 90 degrees clockwise and move forward 1 space</li>
+                <li>If on a black space, Change the colour of the space, rotate 90 degrees anti-clockwise and move forward 1
+                    space</li>
+            </ol>
+            <br> This results in a pattaern that is seemingly random until around 10,000 steps when the ant begins creating a
+            recuring patern indefinately.
+        </p>
+    </div>
+    <div class="content">
+        <h2>
+            Visualisation
+        </h2>
+        <p>
+            Visualisation of Langton's ant as a strict cellular automaton is done by having each cell be black or white, and the cell
+            with the ant be one of eight colours, each one representing a different combination of colour and direction.
+            However usually it is instead represented by having a grid of black or white cells with an ant overlay.
+        </p>
+        <canvas id="golCanvas" width="750" height="500" onclick="pClick()"></canvas>
+        <br>
+        <button onclick="toggleStart()">Start/Stop</button>
+        <button onclick="restart()">Restart</button>
+    </div>
+    <script src="langtonsant.js"></script>
+
+</body>
+
+</html>

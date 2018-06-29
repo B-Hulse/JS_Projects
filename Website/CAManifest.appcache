@@ -1,0 +1,10 @@
+CACHE MANIFST
+/CAStyle.css
+/resources/GoL_Gun.gif
+/resources/r30.png
+/briansbrain.js
+/gameoflife.js
+/langtonsant.js
+
+FALLBACK:
+/html/ /offline.html

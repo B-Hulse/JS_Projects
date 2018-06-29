@@ -1,0 +1,21 @@
+@media print{
+    div.page_header{
+        margin: 50px;
+        padding:0px;
+        padding-top:0px;
+    }
+    .menu {
+        display: none;
+    }
+    div.content {
+        margin: 10px;
+    }
+    button {
+        display: none;
+    }
+    canvas {
+        border: black;
+        border-width: 2;
+        border-style: solid;
+    }
+}

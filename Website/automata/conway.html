@@ -1,0 +1,91 @@
+<!DOXTYPE html>
+<html manifest="CAManifest.appcache">
+
+<head>
+    <title>Conway's Game of Life</title>
+    <link rel="stylesheet" type="text/css" href="CAStyle.css">
+    <link rel="stylesheet" type="text/css" href="CAPrint.css">
+</head>
+
+<body>
+    <div class="page_header">
+        <h1>Conway's Game of Life</h1>
+    </div>
+    <ul class="menu">
+        <li style="float:right">
+            <a href="main.html">Main Page</a>
+        </li>
+        <li>
+            <a href="conway.html">Game of Life</a>
+        </li>
+        <li>
+            <a href="briansbrain.html">Brian's Brain</a>
+        </li>
+        <li>
+            <a href="rule30.html">Rule 30</a>
+        </li>
+        <li>
+            <a href="ant.html">Langton's Ant</a>
+        </li>
+    </ul>
+    </br>
+    <div class="content">
+        <h2>
+            Overview
+        </h2>
+        <p>
+            Created by John Horton Conway in 1970, Conway's game of Life is a two-dimentional cellular automaton where each cell has
+            two states: Alive or Dead. The game istelf exists in an infinite Two-Dimentional grid of square cells.
+            <br>
+            <br> Although it is a 'game' it is one that requires no player. This means that the outcome of the game is solely
+            reliant on the starting conditions. That being which cells are which state when the the atomaton is started.
+        </p>
+    </div>
+    <div class=" content">
+        <h2>
+            Rules
+        </h2>
+        <p>
+            Each time step every cell interacts with its 8 neighbours and decides which state to change to depending on the states of
+            the surrounding neighbours. At each time increment, there are four events:
+            <ol>
+                <li>Any living cell with less than two living neighbours dies</li>
+                <li>Any living cell with two or three living neighbours lives</li>
+                <li>Any livin cell with more than 3 neighbours dies</li>
+                <li>Any dead cell with three neigbours becomes alive</li>
+            </ol>
+            However each cell should be checked simultaniously, meaning that if at time step 4 a cell dies, all other cells will still
+            see it as alive until time step 5.
+        </p>
+    </div>
+    <div class="content">
+        <h2>
+            Visualisation
+        </h2>
+        <p>
+            Use this javascript simulation to explore how initial conditions act in Conway's Game of Life.
+        </p>
+        <canvas id="golCanvas" width="750 " height="500 " onclick="pClick()"></canvas>
+        <br>
+        <button onclick="toggleStart() ">Start/Stop</button>
+        <button onclick="randomizeGrid() ">Randomize Grid</button>
+    </div>
+    <div class="content">
+        <h2>
+            Patterns
+        </h2>
+        <p>
+            Many different patterns have been observed in Conway's Game of Life, some of which are static, and once reached do not change
+            without ouside interference (Called Still Lifes). Others oscillate between multiple states (Oscillators) and
+            some move across the grid indefinately (Gliders).
+            <br>
+            <br> As well as these types there are 'Guns' which are patterns that oscillate and in their oscillation create gliders.
+        </p>
+        <img src="resources/GoL_Gun.gif" alt="An example of a gun in Conway's Game of Life">
+    </div>
+
+    <script src="gameoflife.js"></script>
+
+</body>
+
+</html>
