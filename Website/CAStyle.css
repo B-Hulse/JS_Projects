@@ -30,12 +30,13 @@ div.page_header{
     background-repeat: no-repeat;
 }
 h1.title{
-    align-self: left;
-    
+    text-align: center;
+    text-shadow: -1px 1px rgb(97, 97, 97);
     margin-bottom: 0px;
     line-height: 300px;
     font-size: 100px;
     color: rgb(0, 0, 0);
+    letter-spacing: 50px;
 }
 ol {
     margin:50px;
