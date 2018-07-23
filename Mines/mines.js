@@ -1,7 +1,7 @@
 canvas = document.getElementById("mines_canvas");
 context = canvas.getContext("2d");
 sqr_size = 32;
-var mine_count = 50;
+var mine_count = 200;
 var arr_w = canvas.width / sqr_size;
 var arr_h = canvas.height / sqr_size;
 let val_arr;
@@ -12,6 +12,7 @@ var mX;
 var mY;
 var game_over = false;
 var interval;
+var started;
 
 reset_game();
 
@@ -24,6 +25,11 @@ canvas.onmousemove = function (e) {
 }
 
 canvas.onmousedown = function (e) {
+    if (!started) {
+        place_bombs();
+        calc_spaces();
+        started = true;
+    }
     if (game_over == false) {
         if (e.shiftKey) {
             if (vis_arr[mY][mX] == 0) {
@@ -31,12 +37,10 @@ canvas.onmousedown = function (e) {
             } else if (vis_arr[mY][mX] == 2) {
                 vis_arr[mY][mX] = 0;
             }
-        }
-        else {
+        } else {
             if (vis_arr[mY][mX] == 2) {
                 vis_arr[mY][mX] = 0;
-            }
-            else {
+            } else {
                 check_space(mX, mY);
             }
         }
@@ -47,9 +51,8 @@ canvas.onmousedown = function (e) {
 
 function reset_game() {
     game_over = false;
+    started = false;
     init_arr();
-    place_bombs();
-    calc_spaces();
     interval = setInterval(() => {
         draw_arr();
         check_win();
@@ -69,40 +72,29 @@ function check_space(x, y) {
 function check_blank(x, y) {
     vis_arr[y][x] = 1;
     if (val_arr[y][x] == 0) {
-        if (x > 0 && vis_arr[y][x - 1] == 0) {
-            check_blank(x - 1, y);
-        }
-        if (x > 0 && y > 0 && vis_arr[y - 1][x - 1] == 0) {
-            check_blank(x - 1, y - 1);
-        }
-        if (x > 0 && y < arr_h - 1 && vis_arr[y + 1][x - 1] == 0) {
-            check_blank(x - 1, y + 1);
-        }
-        if (x < arr_w - 1 && vis_arr[y][x + 1] == 0) {
-            check_blank(x + 1, y);
-        }
-        if (x < arr_w - 1 && y > 0 && vis_arr[y - 1][x + 1] == 0) {
-            check_blank(x + 1, y - 1);
-        }
-        if (x < arr_w - 1 && y < arr_h - 1 && vis_arr[y + 1][x + 1] == 0) {
-            check_blank(x + 1, y + 1);
-        }
-        if (y > 0 && vis_arr[y - 1][x] == 0) {
-            check_blank(x, y - 1);
-        }
-        if (y < arr_h - 1 && vis_arr[y + 1][x] == 0) {
-            check_blank(x, y + 1);
+        for (let xoff = -1; xoff <= 1; xoff++) {
+            for (let yoff = -1; yoff <= 1; yoff++) {
+                let i = x + xoff;
+                let j = y + yoff;
+                if (i >= 0 && i < arr_w && j >= 0 && j < arr_h) {
+                    if (!(x == i && y == j)) {
+                        if (vis_arr[j][i] == 0) {
+                            check_blank(i,j);
+                        }
+                    }
+                }
+            }
         }
     }
 }
 
-function place_bombs() {
+function place_bombs(x,y) {
     for (let i = 0; i < mine_count; i++) {
-        var x = Math.floor(Math.random() * arr_w);
-        var y = Math.floor(Math.random() * arr_h);
+        do {
+            var x = Math.floor(Math.random() * arr_w);
+            var y = Math.floor(Math.random() * arr_h);
+        } while (val_arr[y][x] == "X" || ((x == mX || x == mX -1 || x == mX + 1) && (y == mY || y == mY -1 || y == mY + 1)));
         val_arr[y][x] = "X";
-        // testing
-        vis_arr[y][x] = 0;
     }
 }
 
@@ -119,47 +111,18 @@ function calc_spaces() {
 
 function check_neightbours(x, y) {
     var count = 0;
-    if (x > 0) {
-        if (val_arr[y][x - 1] == "X") {
-            count++;
-        }
-        if (y > 0) {
-            if (val_arr[y - 1][x - 1] == "X") {
-                count++;
-            }
-        }
-        if (y < arr_h - 1) {
-            if (val_arr[y + 1][x - 1] == "X") {
-                count++;
-            }
-        }
-    }
-    if (x < arr_w - 1) {
-        if (val_arr[y][x + 1] == "X") {
-            count++;
-        }
-        if (y > 0) {
-            if (val_arr[y - 1][x + 1] == "X") {
-                count++;
-            }
-        }
-        if (y < arr_h - 1) {
-            if (val_arr[y + 1][x + 1] == "X") {
-                count++;
-            }
-        }
-    }
-    if (y > 0) {
-        if (val_arr[y - 1][x] == "X") {
-            count++;
-        }
-    }
-    if (y < arr_h - 1) {
-        if (val_arr[y + 1][x] == "X") {
-            count++;
-        }
-    }
 
+    for (let xoff = -1; xoff <= 1; xoff++) {
+        for (let yoff = -1; yoff <= 1; yoff++) {
+            i = x + xoff;
+            j = y + yoff;
+            if (i >= 0 && i < arr_w && j >= 0 && j < arr_h) {
+                if (val_arr[j][i] == "X") {
+                    count++;
+                }
+            }
+        }
+    }
     return count;
 }
 
@@ -183,9 +146,7 @@ function check_win() {
                     alert("You Lost, Try Again");
                     game_over = true;
                     clearInterval(interval);
-        draw_arr();
-                    
-
+                    draw_arr();
                 } else {
                     mineless--;
                 }
@@ -215,8 +176,7 @@ function draw_arr() {
                 context.fillRect(x * sqr_size, y * sqr_size, sqr_size, sqr_size);
                 context.fillStyle = "#000000";
                 context.fillText(val_arr[y][x], x * sqr_size + (sqr_size * 0.25), y * sqr_size + (sqr_size * 0.75));
-            }
-            else if (vis_arr[y][x] == 2) {
+            } else if (vis_arr[y][x] == 2) {
                 context.fillStyle = "#FF0000";
                 context.fillText("F", x * sqr_size + (sqr_size * 0.25), y * sqr_size + (sqr_size * 0.75));
             }
